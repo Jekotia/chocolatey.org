@@ -17,7 +17,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # =====================================================================
-
+$ChocoVersionRegex = '^(\d+)\.(\d+)\.(\d+)$'
+$testchoco = (powershell choco -v)
+if( $testchoco -Match $ChocoVersionRegex ) {
+    choco update
+} else {
 # For organizational deployments of Chocolatey, please see https://chocolatey.org/docs/how-to-setup-offline-installation
 
 # Environment Variables, specified as $env:NAME in PowerShell.exe and %NAME% in cmd.exe.
@@ -263,7 +267,7 @@ $chocoPkgDir = Join-Path $chocoPath 'lib\chocolatey'
 $nupkg = Join-Path $chocoPkgDir 'chocolatey.nupkg'
 if (![System.IO.Directory]::Exists($chocoPkgDir)) { [System.IO.Directory]::CreateDirectory($chocoPkgDir); }
 Copy-Item "$file" "$nupkg" -Force -ErrorAction SilentlyContinue
-
+}
 # SIG # Begin signature block
 # MIIcpwYJKoZIhvcNAQcCoIIcmDCCHJQCAQExDzANBglghkgBZQMEAgEFADB5Bgor
 # BgEEAYI3AgEEoGswaTA0BgorBgEEAYI3AgEeMCYCAwEAAAQQH8w7YFlLCE63JNLG
