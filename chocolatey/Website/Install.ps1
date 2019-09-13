@@ -17,9 +17,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # =====================================================================
-$ChocoVersionRegex = '^(\d+)\.(\d+)\.(\d+)$'
-$testchoco = (powershell choco -v)
-if( $testchoco -Match $ChocoVersionRegex ) {
+
+if( Get-Command choco.exe -ErrorAction Ignore ) {
     choco update
 } else {
 # For organizational deployments of Chocolatey, please see https://chocolatey.org/docs/how-to-setup-offline-installation
